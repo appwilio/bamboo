@@ -5,9 +5,12 @@ FROM ubuntu:16.04
 
 EXPOSE 8085
 
-RUN apt-get update
+RUN apt-get update -y
 #ADD repo for PHP7.1
-RUN apt-get install -y software-properties-common python-software-properties \
+RUN locale-gen en_US.UTF-8 \
+	&& export LANG=en_US.UTF-8 \
+	&& apt-get install -y -f -q software-properties-common python-software-properties \
+	&& locale -a \
 	&& add-apt-repository -y ppa:ondrej/php \
 	&& apt-get update -y
 
