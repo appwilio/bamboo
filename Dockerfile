@@ -7,7 +7,7 @@ EXPOSE 8085
 
 RUN apt-get update
 #ADD repo for PHP7.1
-RUN apt-get install -y python-software-properties \
+RUN apt-get install -y software-properties-common python-software-properties \
 	&& add-apt-repository -y ppa:ondrej/php \
 	&& apt-get update -y
 
