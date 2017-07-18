@@ -1,8 +1,10 @@
 BAMBOO_INSTALL="/home/bamboo/install"
 BAMBOO_HOME="/home/bamboo/home"
+BAMBOO_MYSQL="/home/bamboo/mysql"
 echo "Making dirs $BAMBOO_INSTALL; $BAMBOO_HOME"
 mkdir -p "$BAMBOO_INSTALL"
 mkdir -p "$BAMBOO_HOME"
+mkdir -p "$BAMBOO_MYSQL"
 echo "Downloading Bamboo"
 curl -L "https://www.atlassian.com/software/bamboo/downloads/binary/atlassian-bamboo-5.15.3.tar.gz" | \
 	tar -xz --directory  "$BAMBOO_INSTALL" --strip-components=1 --no-same-owner

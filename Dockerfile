@@ -6,6 +6,10 @@ FROM ubuntu:16.04
 EXPOSE 8085
 
 RUN apt-get update
+#ADD repo for PHP7.1
+RUN apt-get install -y python-software-properties \
+	&& add-apt-repository -y ppa:ondrej/php \
+	&& apt-get update -y
 
 #Install software neneded for installation
 RUN apt-get install -y -f -q curl
@@ -32,18 +36,20 @@ RUN mkdir -p "/usr/share/jmeter/" \
 RUN apt-get install -y -f -q git
 
 #Install PHP to get projects works
-RUN apt-get install -y -f -q php7.0 \
+RUN apt-get install -y -f -q php7.1 \
 	#For composer install requirements
-	&& apt-get install -y -f -q php7.0-curl \
-	&& apt-get install -y -f -q php7.0-mysql \
-	&& apt-get install -y -f -q php7.0-mbstring \
-	&& apt-get install -y -f -q php7.0-xml \
-	&& echo "memory_limit = 521M" >> /etc/php/7.0/cli/conf.d/fortest.ini
+	&& apt-get install -y -f -q php7.1-curl \
+	&& apt-get install -y -f -q php7.1-mysql \
+	&& apt-get install -y -f -q php7.1-mbstring \
+	&& apt-get install -y -f -q php7.1-xml \
+	&& apt-get install -y -f -q php7.1-zip \
+	&& echo "memory_limit = 521M" >> /etc/php/7.1/cli/conf.d/fortest.ini
 
 #Install composer
 RUN cd /tmp \
 	&& curl -sS https://getcomposer.org/installer | php \
-	&& mv composer.phar /usr/local/bin/composer
+	&& mv composer.phar /usr/local/bin/composer \
+	&& composer global require hirak/prestissimo
 
 #Install PHPUnit to run tests
 RUN wget -q "https://phar.phpunit.de/phpunit.phar" \
