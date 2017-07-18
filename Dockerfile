@@ -6,6 +6,7 @@ FROM ubuntu:16.04
 EXPOSE 8085
 
 RUN apt-get update -y
+RUN apt-get install -y -f -q locales
 #ADD repo for PHP7.1
 RUN locale-gen en_US.UTF-8 \
 	&& export LANG=en_US.UTF-8 \
