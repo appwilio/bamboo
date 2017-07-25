@@ -18,6 +18,7 @@ RUN locale-gen en_US.UTF-8 \
 #Install software neneded for installation
 RUN apt-get install -y -f -q curl
 RUN apt-get install -y -f -q wget
+RUN apt-get install -y -f -q zip
 
 #Install and config mysql
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -f -q install mysql-server-5.7 \
