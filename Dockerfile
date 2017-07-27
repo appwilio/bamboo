@@ -21,7 +21,8 @@ RUN apt-get install -y -f -q wget
 RUN apt-get install -y -f -q zip
 
 #Install and config mysql
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y -f -q install mysql-server-5.7 \
+RUN apt-get update --fix-missing \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -y -f -q install mysql-server-5.7 \
 	&& echo "[mysqld]" >> /etc/mysql/my.cnf \
 	&& echo "character-set-server = utf8" >> /etc/mysql/my.cnf \
 	&& echo "collation-server = utf8_bin" >> /etc/mysql/my.cnf \
@@ -33,7 +34,7 @@ RUN apt-get install -y -f -q default-jdk
 #Install jmeter for load testing
 RUN mkdir -p "/usr/share/jmeter/" \
 	&& cd /tmp \
-	&& wget -qc http://ftp.ps.pl/pub/apache//jmeter/binaries/apache-jmeter-3.1.tgz \
+	&& wget -qc http://ftp.ps.pl/pub/apache/jmeter/binaries/apache-jmeter-3.1.tgz \
 	&& tar -xf apache-jmeter-3.1.tgz --directory "/usr/share/jmeter" --strip-components=1 --no-same-owner \
 	&& ln -s /usr/share/jmeter/bin/jmeter /usr/bin/jmeter
 
