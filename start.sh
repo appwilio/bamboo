@@ -10,7 +10,8 @@ if [ ! -d /var/lib/mysql/mysql ]; then
         mysql -u root -e "CREATE USER IF NOT EXISTS 'bamboo'@'localhost' IDENTIFIED BY '123456';"
 	mysql -u root -e "GRANT all ON bamboo.* TO 'bamboo'@'localhost';"
 else 
-chown mysql:mysql /var/lib/mysql
+#chown mysql:mysql /var/lib/mysql
+chown -R mysql /var/lib/mysql
 service mysql start
 fi
 
